@@ -2,7 +2,11 @@
   "ExpandedNodes": [
     "",
     "\\public",
-    "\\src"
+    "\\src",
+    "\\src\\assets",
+    "\\src\\pages",
+    "\\src\\pages\\Login"
   ],
+  "SelectedNode": "\\src\\pages\\Login\\index.js",
   "PreviewInSolutionExplorer": false
 }

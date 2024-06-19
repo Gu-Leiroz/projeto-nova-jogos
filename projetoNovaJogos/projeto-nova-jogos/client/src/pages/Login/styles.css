@@ -1,0 +1,44 @@
+login-conteiner {
+    width: 100%;
+    max-width:1120px;
+    height:100vh;
+    margin: 0 auto;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #191970;
+}
+
+
+.login-conteiner section.form{
+
+    width:100%;
+    max-width: 350px;
+    margin-right: 60px;
+
+}
+
+
+.login-conteiner section.form img{
+
+    width: 15%;
+    margin-left: 35px;
+    margin-right: auto;
+    display: block;
+
+}
+
+
+ .login-conteiner section.form form {
+        margin-top: 100px;   
+        margin-left: 70px;
+        
+        }
+
+ 
+ .login-conteiner section.form h1 {
+ 
+    font-size: 32px;
+    margin-bottom: 32px;
+ }
