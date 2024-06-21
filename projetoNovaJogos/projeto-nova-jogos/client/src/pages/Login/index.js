@@ -2,7 +2,7 @@ import React from 'react';
 import './styles.css';
 
 import logoImg from '../../assets/cogumelo.png'
-import padlock from '../../assets/botao-de-login.png'
+
 
 export default function Login() {
     return (
@@ -21,7 +21,7 @@ export default function Login() {
                 </form>
 
             </section>
-[
+
             
 
         </div>
