@@ -12,13 +12,16 @@ export default function newJogo() {
         <div className="new-jogo-container">
             <div className="content">
                 <section className="form">
+                
+                    <a className="back-link" href="/jogos">
                     <img src={logoImg} alt="Nova" />
+                   </a>
                     <h1>Add Novo Jogo</h1>
                     <p>Coloque as infos e clique em "Add"!</p>
                     <a className="back-link" href="/jogos">
                         <FiArrowLeft size={16} color="#191970" />
                         Home
-                    </a>
+                   </a>
                 </section>
                 <form>
                     <input placeholder="Name"/>
