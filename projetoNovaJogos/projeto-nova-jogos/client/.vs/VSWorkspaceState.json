@@ -7,8 +7,9 @@
     "\\src\\pages",
     "\\src\\pages\\Jogos",
     "\\src\\pages\\Login",
-    "\\src\\pages\\NewJogos"
+    "\\src\\pages\\NewJogos",
+    "\\src\\services"
   ],
-  "SelectedNode": "\\src\\pages\\Jogos\\styles.css",
+  "SelectedNode": "\\src\\pages\\Login\\index.js",
   "PreviewInSolutionExplorer": false
 }

@@ -3,71 +3,42 @@ package br.com.nova.jogos.data.vo.v1;
 import java.io.Serializable;
 import java.util.Objects;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import org.springframework.hateoas.RepresentationModel;
 
-@Entity
-@Table(name = "postagem")
-public class PostagemVO implements Serializable {
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.github.dozermapper.core.Mapping;
 
-	
+@JsonPropertyOrder({"id", "nome", "valor", "genero", "descricao", "nota"})
+public class PostagemVO extends RepresentationModel<PostagemVO> implements Serializable {
+
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	
-	@Column(nullable = false, length = 80)
+
+	@Mapping("id")
+	@JsonProperty("id")
+	private Long key;
+
 	private String nome;
-	
-	@Column(nullable = false)
-	private Double valor; 
-	
-	@Column(nullable = false, length = 80)
+
+	private Double valor;
+
 	private String genero;
-	
-	@Column(nullable = false, length = 300)
+
+	@JsonProperty("descrição")
 	private String descricao;
-	
-	@Column(nullable = false)
+
 	private Double nota;
 
-	
-	 public PostagemVO() {}
-		
-	
-	
-	
-	
-	public Long getId() {
-		return id;
+	public PostagemVO() {
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public Long getKey() {
+		return key;
 	}
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(descricao, genero, id, nome, nota, valor);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		PostagemVO other = (PostagemVO) obj;
-		return Objects.equals(descricao, other.descricao) && Objects.equals(genero, other.genero)
-				&& Objects.equals(id, other.id) && Objects.equals(nome, other.nome) && Objects.equals(nota, other.nota)
-				&& Objects.equals(valor, other.valor);
+	public void setKey(Long key) {
+		this.key = key;
 	}
 
 	public String getNome() {
@@ -108,5 +79,27 @@ public class PostagemVO implements Serializable {
 
 	public void setNota(Double nota) {
 		this.nota = nota;
-	} 
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + Objects.hash(descricao, genero, key, nome, nota, valor);
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		PostagemVO other = (PostagemVO) obj;
+		return Objects.equals(descricao, other.descricao) && Objects.equals(genero, other.genero)
+				&& Objects.equals(key, other.key) && Objects.equals(nome, other.nome)
+				&& Objects.equals(nota, other.nota) && Objects.equals(valor, other.valor);
+	}
 }
