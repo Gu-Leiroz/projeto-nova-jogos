@@ -1,8 +1,12 @@
 package br.com.nova.jogos.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.PagedModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.nova.jogos.data.vo.v1.PostagemVO;
@@ -24,16 +29,16 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-//@CrossOrigin
+
 @RestController
 @RequestMapping("/api/postagem/v1")
+@CrossOrigin("*")
 @Tag(name = "Posts", description = "Endpoints para os posts dos jogos")
 public class PostagemController {
 
 	@Autowired
 	PostagemService service;
 	
-	@CrossOrigin(origins = {"http://localhost:8080", "http://localhost:3000"})
 	@PostMapping(produces = {MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YML}, 
 				 consumes = {MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YML})
 	@Operation(summary = "Cria os Posts", description = "Cria os Posts",
@@ -54,7 +59,6 @@ public class PostagemController {
 		return service.create(postagem);
 	}
 
-	@CrossOrigin(origins = {"http://localhost:8080", "http://localhost:3000"})
 	@GetMapping(value = "/{id}", produces = {MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YML})
 	@Operation(summary = "Acha o Post por Id", description = "Acha o Post por Id",
 	tags = {"Posts"}, 
@@ -75,7 +79,6 @@ public class PostagemController {
 	
 
 	@GetMapping(produces = {MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YML})
-	@CrossOrigin(origins = {"http://localhost:8080", "http://localhost:3000"})
 	@Operation(summary = "Puxa lista dos Posts", description = "Puxa lista das Posts",
 	tags = {"Posts"}, 
 	responses = {
@@ -92,13 +95,21 @@ public class PostagemController {
 			@ApiResponse(description = "Internal Error", responseCode = "500", content = @Content)
 	}
 )
-	public List<PostagemVO> findAll() {
-		return service.findAll();
+	public ResponseEntity<PagedModel<EntityModel<PostagemVO>>> findAll(
+			@RequestParam(value = "page", defaultValue = "0") Integer page,
+			@RequestParam(value = "limit", defaultValue = "12") Integer size,
+			@RequestParam(value = "direction", defaultValue = "asc") String direction
+			) {
+		
+		var sortDirection = "desc".equalsIgnoreCase(direction)
+				? Direction.DESC : Direction.ASC;
+		
+		Pageable pagable = PageRequest.of(page, size, Sort.by(sortDirection, "id"));
+		return ResponseEntity.ok(service.findAll(pagable));
 	}
 
 	@PutMapping(produces = {MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YML}, 
 				consumes = {MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YML})
-	@CrossOrigin(origins = {"http://localhost:8080", "http://localhost:3000"})
 	@Operation(summary = "Atualiza os Posts", description = "Atualiza os Posts",
 			tags = {"Posts"}, 
 			responses = {
@@ -118,8 +129,7 @@ public class PostagemController {
 		return service.update(postagem);
 	}
 
-	@DeleteMapping(value = "/{id}")
-	@CrossOrigin(origins = {"http://localhost:8080", "http://localhost:3000"})
+	@DeleteMapping(value = "/{id}", produces = {MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YML})
 	@Operation(summary = "Deleta os Posts pelo Id", description = "Deleta os Posts pelo Id",
 			tags = {"Posts"}, 
 			responses = {
@@ -133,7 +143,7 @@ public class PostagemController {
 
 	public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) {
 		service.delete(id);
-		return ResponseEntity.noContent().build();
+		return ResponseEntity.ok("Postagem com o id " + id + " foi excluída com sucesso.");
 
 	}
 

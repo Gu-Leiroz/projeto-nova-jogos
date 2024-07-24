@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Objects;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,7 +21,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "users")
-public class User implements  UserDetails ,Serializable{
+public class User implements  UserDetails ,Serializable {
 		
 		private static final long serialVersionUID = 1L;
 
@@ -39,17 +38,6 @@ public class User implements  UserDetails ,Serializable{
 		@Column(name="password")
 		private String password;
 		
-		@Column(name="account_non_expired")
-		private Boolean accountNonExpired;
-		
-		@Column(name="account_non_locked")
-		private Boolean accountNonLocked;
-		
-		@Column(name = "credentials_non_expired")
-		private Boolean credentialsNonExpired; 
-
-		@Column(name = "enabled")
-		private Boolean enabled; 
 		
 		@ManyToMany(fetch = FetchType.EAGER)
 		@JoinTable(name = "user_permission", joinColumns = {@JoinColumn (name = "id_user")},
@@ -57,9 +45,16 @@ public class User implements  UserDetails ,Serializable{
 		private List<Permission> permissions;
 		
 		
+		public User(String Username, String email , String password, List<Permission> permission) {
+			this.userName = Username;
+			this.email = email;
+			this.password = password;
+			this.permissions = permission;
+		}
+		
+
 		
 		
-		public User() {}
 
 
 		public List<String> getRoles(){
@@ -86,35 +81,6 @@ public class User implements  UserDetails ,Serializable{
 			return this.userName;
 		}
 
-		@Override
-		public boolean isAccountNonExpired() {
-			return this.accountNonExpired;
-		}
-
-		@Override
-		public int hashCode() {
-			return Objects.hash(accountNonExpired, accountNonLocked, credentialsNonExpired, email, enabled, id,
-					password, permissions, userName);
-		}
-
-		@Override
-		public boolean equals(Object obj) {
-			if (this == obj)
-				return true;
-			if (obj == null)
-				return false;
-			if (getClass() != obj.getClass())
-				return false;
-			User other = (User) obj;
-			return Objects.equals(accountNonExpired, other.accountNonExpired)
-					&& Objects.equals(accountNonLocked, other.accountNonLocked)
-					&& Objects.equals(credentialsNonExpired, other.credentialsNonExpired)
-					&& Objects.equals(email, other.email) && Objects.equals(enabled, other.enabled)
-					&& Objects.equals(id, other.id) && Objects.equals(password, other.password)
-					&& Objects.equals(permissions, other.permissions) && Objects.equals(userName, other.userName);
-		}
-
-
 		public Long getId() {
 			return id;
 		}
@@ -134,45 +100,6 @@ public class User implements  UserDetails ,Serializable{
 			this.email = email;
 		}
 
-
-		public Boolean getAccountNonExpired() {
-			return accountNonExpired;
-		}
-
-
-		public void setAccountNonExpired(Boolean accountNonExpired) {
-			this.accountNonExpired = accountNonExpired;
-		}
-
-
-		public Boolean getAccountNonLocked() {
-			return accountNonLocked;
-		}
-
-
-		public void setAccountNonLocked(Boolean accountNonLocked) {
-			this.accountNonLocked = accountNonLocked;
-		}
-
-
-		public Boolean getCredentialsNonExpired() {
-			return credentialsNonExpired;
-		}
-
-
-		public void setCredentialsNonExpired(Boolean credentialsNonExpired) {
-			this.credentialsNonExpired = credentialsNonExpired;
-		}
-
-
-		public Boolean getEnabled() {
-			return enabled;
-		}
-
-
-		public void setEnabled(Boolean enabled) {
-			this.enabled = enabled;
-		}
 
 
 		public List<Permission> getPermissions() {
@@ -196,18 +123,26 @@ public class User implements  UserDetails ,Serializable{
 
 
 		@Override
-		public boolean isAccountNonLocked() {
-			return this.accountNonLocked;
+		public boolean isAccountNonExpired() {
+			return true;
 		}
+
+
+		@Override
+		public boolean isAccountNonLocked() {
+			return true;
+		}
+
 
 		@Override
 		public boolean isCredentialsNonExpired() {
-			return this.credentialsNonExpired;
+			return true;
 		}
+
 
 		@Override
 		public boolean isEnabled() {
-			return this.enabled;
+			return true;
 		}
 
 }

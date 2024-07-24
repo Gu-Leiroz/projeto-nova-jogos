@@ -20,40 +20,23 @@ public class Postagem implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	@Column(nullable = false, length = 80)
-	private String nome;
-	
-	@Column(nullable = false)
-	private Double valor; 
-	
-	@Column(nullable = false, length = 80)
-	private String genero;
+
+	@Column(nullable = false, length = 50)
+	private String autor;
 	
 	@Column(nullable = false, length = 300)
+	private String titulo;
+	
+	@Column(nullable = false, length = 1000)
 	private String descricao;
-	
-	@Column(nullable = false)
-	private Double nota;
 
 	
-	 public Postagem() {}
-		
+	public Postagem() {}
 	
 	
-	
-	
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
 	@Override
 	public int hashCode() {
-		return Objects.hash(descricao, genero, id, nome, nota, valor);
+		return Objects.hash(autor, descricao, id, titulo);
 	}
 
 	@Override
@@ -65,33 +48,32 @@ public class Postagem implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Postagem other = (Postagem) obj;
-		return Objects.equals(descricao, other.descricao) && Objects.equals(genero, other.genero)
-				&& Objects.equals(id, other.id) && Objects.equals(nome, other.nome) && Objects.equals(nota, other.nota)
-				&& Objects.equals(valor, other.valor);
+		return Objects.equals(autor, other.autor) && Objects.equals(descricao, other.descricao)
+				&& Objects.equals(id, other.id) && Objects.equals(titulo, other.titulo);
 	}
 
-	public String getNome() {
-		return nome;
+	public Long getId() {
+		return id;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
-	public Double getValor() {
-		return valor;
+	public String getAutor() {
+		return autor;
 	}
 
-	public void setValor(Double valor) {
-		this.valor = valor;
+	public void setAutor(String autor) {
+		this.autor = autor;
 	}
 
-	public String getGenero() {
-		return genero;
+	public String getTitulo() {
+		return titulo;
 	}
 
-	public void setGenero(String genero) {
-		this.genero = genero;
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
 	}
 
 	public String getDescricao() {
@@ -100,13 +82,5 @@ public class Postagem implements Serializable {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
-	}
-
-	public Double getNota() {
-		return nota;
-	}
-
-	public void setNota(Double nota) {
-		this.nota = nota;
 	} 
 }

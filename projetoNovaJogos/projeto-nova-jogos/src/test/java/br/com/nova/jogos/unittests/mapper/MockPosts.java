@@ -35,23 +35,19 @@ public class MockPosts {
     
     public Postagem mockEntity(Double number) {
         Postagem postagem = new Postagem();
-        postagem.setNome("Nome test" + number);
-        postagem.setValor(number);
-        postagem.setGenero(((number % 2)==0) ? "Male" : "Female");
+        postagem.setAutor("Autor test" + number);
+        postagem.setTitulo("Titulo test" + number);
         postagem.setId(number.longValue());
         postagem.setDescricao("Descrição test" + number);
-        postagem.setNota(number);
         return postagem;
     }
 
     public PostagemVO mockVO(Double number) {
         PostagemVO postagem = new PostagemVO();
-        postagem.setNome("Nome test" + number);
-        postagem.setValor(number);
-        postagem.setGenero(((number % 2)==0) ? "Male" : "Female");
+        postagem.setAutor("Autor test" + number);
+        postagem.setTitulo("Titulo test" + number);
         postagem.setKey(number.longValue());
         postagem.setDescricao("Descrição test" + number);
-        postagem.setNota(number);
         return postagem;
     }
 

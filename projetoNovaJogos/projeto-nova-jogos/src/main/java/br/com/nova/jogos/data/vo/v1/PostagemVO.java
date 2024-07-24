@@ -14,78 +14,24 @@ public class PostagemVO extends RepresentationModel<PostagemVO> implements Seria
 
 	private static final long serialVersionUID = 1L;
 
-
 	@Mapping("id")
 	@JsonProperty("id")
 	private Long key;
 
-	private String nome;
+	private String autor;
 
-	private Double valor;
-
-	private String genero;
-
-	@JsonProperty("descrição")
 	private String descricao;
 
-	private Double nota;
+	private String titulo;
 
 	public PostagemVO() {
-	}
-
-	public Long getKey() {
-		return key;
-	}
-
-	public void setKey(Long key) {
-		this.key = key;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public Double getValor() {
-		return valor;
-	}
-
-	public void setValor(Double valor) {
-		this.valor = valor;
-	}
-
-	public String getGenero() {
-		return genero;
-	}
-
-	public void setGenero(String genero) {
-		this.genero = genero;
-	}
-
-	public String getDescricao() {
-		return descricao;
-	}
-
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
-
-	public Double getNota() {
-		return nota;
-	}
-
-	public void setNota(Double nota) {
-		this.nota = nota;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + Objects.hash(descricao, genero, key, nome, nota, valor);
+		result = prime * result + Objects.hash(autor, descricao, key, titulo);
 		return result;
 	}
 
@@ -98,8 +44,40 @@ public class PostagemVO extends RepresentationModel<PostagemVO> implements Seria
 		if (getClass() != obj.getClass())
 			return false;
 		PostagemVO other = (PostagemVO) obj;
-		return Objects.equals(descricao, other.descricao) && Objects.equals(genero, other.genero)
-				&& Objects.equals(key, other.key) && Objects.equals(nome, other.nome)
-				&& Objects.equals(nota, other.nota) && Objects.equals(valor, other.valor);
+		return Objects.equals(autor, other.autor) && Objects.equals(descricao, other.descricao)
+				&& Objects.equals(key, other.key) && Objects.equals(titulo, other.titulo);
 	}
+
+	public Long getKey() {
+		return key;
+	}
+
+	public void setKey(Long key) {
+		this.key = key;
+	}
+
+	public String getAutor() {
+		return autor;
+	}
+
+	public void setAutor(String autor) {
+		this.autor = autor;
+	}
+
+	public String getTitulo() {
+		return titulo;
+	}
+
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
 }

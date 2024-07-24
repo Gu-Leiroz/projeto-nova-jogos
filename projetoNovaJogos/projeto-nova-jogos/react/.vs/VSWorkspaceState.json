@@ -1,0 +1,17 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\front",
+    "\\front\\src",
+    "\\front\\src\\assets",
+    "\\front\\src\\assets\\img",
+    "\\front\\src\\components",
+    "\\front\\src\\components\\home",
+    "\\front\\src\\components\\posts",
+    "\\front\\src\\components\\template",
+    "\\front\\src\\components\\user",
+    "\\front\\src\\main"
+  ],
+  "SelectedNode": "\\front\\src\\components\\template\\Logo.jsx",
+  "PreviewInSolutionExplorer": false
+}

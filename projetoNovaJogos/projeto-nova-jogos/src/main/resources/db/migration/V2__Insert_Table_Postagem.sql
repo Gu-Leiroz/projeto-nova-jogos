@@ -1,2 +1,2 @@
-INSERT INTO `postagem` (`id`, `descricao`, `genero`, `nome`, `nota`, `valor`) VALUES
-	(1, 'São Paulo', 'FPS', 'Cleiton', 5, 200);
+INSERT INTO `postagem` (`id`, `autor`,`titulo`, `descricao`) VALUES
+	(1, 'Gustavo','Atualizações “checkpoint” para Windows 11 e Server 2025 prometem ser mais rápidas e eficientes', 'A novidade estará disponível a partir do final de 2024 para dispositivos com versão 24H2 ou posterior, visando economizar largura de banda, espaço no disco rígido e tempo de instalação, entregando correções de segurança e novos recursos com atualizações incrementais menores, contendo apenas as mudanças feitas desde o último “checkpoint”. A funcionalidade pode ser testada no Windows Insider Preview Build 26120.1252. As informações são do site BleepingComputer.');
